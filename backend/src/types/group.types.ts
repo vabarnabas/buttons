@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { linkSchema } from "./link.types";
 
 export const createGroupSchema = z.object({
   name: z.string(),
@@ -16,6 +17,7 @@ export const groupSchema = z.object({
   name: z.string(),
   description: z.string().optional(),
   pageId: z.string(),
+  links: z.array(linkSchema),
 });
 
 export type Group = z.infer<typeof groupSchema>;

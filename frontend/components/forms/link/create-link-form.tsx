@@ -8,41 +8,60 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { CreatePage, createPageSchema } from "@/types/page.types";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
-import { createPage } from "@/lib/actions/page";
-import { Textarea } from "@/components/ui/textarea";
+import { CreateLink, createLinkSchema } from "@/types/link.types";
+import { createLink } from "@/lib/actions/link";
 
-export default function CreatePageForm() {
-  const form = useForm<CreatePage>({
-    resolver: zodResolver(createPageSchema),
+export default function CreateLinkForm({
+  groupId,
+  pageId,
+}: {
+  groupId: string;
+  pageId: string;
+}) {
+  const form = useForm<CreateLink>({
+    resolver: zodResolver(createLinkSchema),
+    defaultValues: { groupId },
   });
 
   const onSubmit = form.handleSubmit((data) => {
-    toast.promise(createPage(data), {
-      loading: "Creating Page...",
-      success: "Page Created Successfully",
-      error: "Failed to Create Page",
+    toast.promise(createLink(data, pageId), {
+      loading: "Creating Link...",
+      success: "Link Created Successfully",
+      error: "Failed to Create Link",
     });
   });
 
   return (
     <Form {...form}>
       <form onSubmit={onSubmit} className="space-y-4">
-        <p className="text-2xl font-semibold">Create Board</p>
         <FormField
           control={form.control}
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Page Name</FormLabel>
+              <FormLabel>Link Name</FormLabel>
               <FormControl>
-                <Input placeholder="Name of Your Page" {...field} />
+                <Input placeholder="Name of your link" {...field} />
+              </FormControl>
+              <FormDescription />
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="url"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>URL</FormLabel>
+              <FormControl>
+                <Input placeholder="e.g. google.com" {...field} />
               </FormControl>
               <FormDescription />
               <FormMessage />
@@ -54,9 +73,9 @@ export default function CreatePageForm() {
           name="description"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Description (optional)</FormLabel>
+              <FormLabel>Tooltip (optional)</FormLabel>
               <FormControl>
-                <Textarea placeholder="Describe Your Page" {...field} />
+                <Input placeholder="e.g. Good search engine" {...field} />
               </FormControl>
               <FormDescription />
               <FormMessage />

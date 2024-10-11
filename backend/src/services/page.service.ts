@@ -12,7 +12,11 @@ export function PageService() {
         id,
       },
       include: {
-        groups: true,
+        groups: {
+          include: {
+            links: true,
+          },
+        },
       },
     });
   }
@@ -23,7 +27,11 @@ export function PageService() {
         userId,
       },
       include: {
-        groups: true,
+        groups: {
+          include: {
+            links: true,
+          },
+        },
       },
     });
   }

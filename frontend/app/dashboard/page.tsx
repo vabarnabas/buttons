@@ -16,7 +16,7 @@ export default async function Dashboard() {
 
   return (
     <div>
-      <p className="text-2xl font-semibold mt-2">My Pages</p>
+      <p className="text-2xl font-semibold mt-2">My Boards</p>
       <div className="mt-6 grid md:grid-cols-2 lg:grid-cols-3 gap-2">
         {pages.map((page) => (
           <Link

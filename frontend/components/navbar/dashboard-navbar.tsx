@@ -24,7 +24,7 @@ export default function DashboardNavbar() {
           href="/dashboard"
           className="flex items-center gap-x-2 text-xl font-medium"
         >
-          <PanelsTopLeft className="size-6" /> Buttons
+          <PanelsTopLeft className="size-6" /> Boards
         </Link>
         <div className="flex gap-x-4 items-center">
           <ThemeSelector />

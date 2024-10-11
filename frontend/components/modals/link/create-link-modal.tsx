@@ -1,5 +1,6 @@
 "use client";
 import CreateGroupForm from "@/components/forms/group/create-group-form";
+import CreateLinkForm from "@/components/forms/link/create-link-form";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -7,23 +8,27 @@ import {
   DialogTrigger,
   DialogContent,
 } from "@/components/ui/dialog";
-import { Box } from "lucide-react";
 import React from "react";
 
-export default function CreateGroupModal({ pageId }: { pageId: string }) {
+export default function CreateLinkModal({
+  pageId,
+  groupId,
+}: {
+  pageId: string;
+  groupId: string;
+}) {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className="flex w-max items-center gap-x-1.5" size="sm">
-          <Box className="size-4" />
-          Add Group
+        <Button variant="secondary" size="sm">
+          Add Link
         </Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader className="text-2xl font-semibold">
-          Create Group
+          Create Link
         </DialogHeader>
-        <CreateGroupForm pageId={pageId} />
+        <CreateLinkForm pageId={pageId} groupId={groupId} />
       </DialogContent>
     </Dialog>
   );

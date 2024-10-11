@@ -5,6 +5,7 @@ import { logger } from "hono/logger";
 import { config } from "dotenv";
 import { pageController } from "./controllers/page.controller";
 import { groupController } from "./controllers/group.controller";
+import { LinkController } from "./controllers/link.controller";
 
 config();
 
@@ -19,6 +20,7 @@ app.use(logger());
 
 app.route("/pages", pageController);
 app.route("groups", groupController);
+app.route("/links", LinkController);
 
 const port = parseInt(process.env.PORT || "3000");
 
