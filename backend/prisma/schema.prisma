@@ -1,0 +1,46 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Page {
+  id String @id @default(uuid())
+
+  name        String
+  description String?
+
+  userId String  @map("user_id")
+  groups Group[]
+
+  @@map("pages")
+}
+
+model Group {
+  id String @id @default(uuid())
+
+  name        String
+  description String?
+
+  pageId String @map("page_id")
+  page   Page   @relation(fields: [pageId], references: [id])
+  links  Link[]
+
+  @@map("groups")
+}
+
+model Link {
+  id String @id @default(uuid())
+
+  name String
+
+  url String
+
+  groupId String @map("group_id")
+  group   Group  @relation(fields: [groupId], references: [id])
+
+  @@map("links")
+}
