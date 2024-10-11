@@ -24,7 +24,7 @@ pageController.post("/", zValidator("json", createPageSchema), async (c) => {
   }
 });
 
-pageController.put("/:id", zValidator("json", updatePageSchema), async (c) => {
+pageController.patch("/:id", zValidator("json", updatePageSchema), async (c) => {
   const { id } = c.req.param();
   const data = c.req.valid("json");
   try {

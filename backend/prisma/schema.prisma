@@ -27,7 +27,8 @@ model Group {
 
   pageId String @map("page_id")
   page   Page   @relation(fields: [pageId], references: [id])
-  links  Link[]
+
+  links Link[]
 
   @@map("groups")
 }
@@ -35,7 +36,8 @@ model Group {
 model Link {
   id String @id @default(uuid())
 
-  name String
+  name        String
+  description String?
 
   url String
 

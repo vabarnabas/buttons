@@ -11,6 +11,9 @@ export function PageService() {
       where: {
         id,
       },
+      include: {
+        groups: true,
+      },
     });
   }
 
@@ -18,6 +21,9 @@ export function PageService() {
     return await prisma.page.findMany({
       where: {
         userId,
+      },
+      include: {
+        groups: true,
       },
     });
   }
