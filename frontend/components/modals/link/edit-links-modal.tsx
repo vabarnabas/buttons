@@ -1,5 +1,7 @@
 "use client";
+import DeleteLinkButton from "@/components/buttons/link/delete-link-button";
 import CreateGroupForm from "@/components/forms/group/create-group-form";
+import EditGroupForm from "@/components/forms/group/edit-group-form";
 import CreateLinkForm from "@/components/forms/link/create-link-form";
 import { Button } from "@/components/ui/button";
 import {
@@ -8,11 +10,12 @@ import {
   DialogTrigger,
   DialogContent,
 } from "@/components/ui/dialog";
-import { LinkType } from "@/types/link.types";
+import { Group } from "@/types/group.types";
 import { LinkIcon, Pencil } from "lucide-react";
+import Image from "next/image";
 import React from "react";
 
-export default function EditLinksModal({ links }: { links: LinkType[] }) {
+export default function EditLinksModal({ group }: { group: Group }) {
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -24,15 +27,39 @@ export default function EditLinksModal({ links }: { links: LinkType[] }) {
         <DialogHeader className="text-2xl font-semibold">
           Edit Links
         </DialogHeader>
-        {links?.length ? (
-          links.map((link) => (
-            <div key={link.id} className="flex justify-between items-center">
-              <div className="">
-                <p className="font-semibold">{link.name}</p>
-                <p className="text-muted-foreground text-sm">{link.url}</p>
+        <EditGroupForm group={group} />
+        {group.links?.length ? (
+          <div className="space-y-4">
+            {group.links.map((link) => (
+              <div
+                key={link.id}
+                className="flex justify-between items-center gap-x-4"
+              >
+                <div className="flex gap-x-4 w-full items-start">
+                  <Image
+                    src={`https://icon.horse/icon/${
+                      link.url.startsWith("http://") ||
+                      link.url.startsWith("https://")
+                        ? link.url
+                            .replace("http://", "")
+                            .replace("https://", "")
+                            .split("/")[0]
+                        : link.url.split("/")[0]
+                    }`}
+                    alt={link.name}
+                    width={16}
+                    height={16}
+                    className="flex-shrink-0 flex aspect-square size-8 rounded-md"
+                  />
+                  <div className="">
+                    <p className="font-semibold">{link.name}</p>
+                    <p className="text-muted-foreground text-xs">{link.url}</p>
+                  </div>
+                </div>
+                <DeleteLinkButton linkId={link.id} pageId={group.pageId} />
               </div>
-            </div>
-          ))
+            ))}
+          </div>
         ) : (
           <div className="h-48 flex flex-col justify-center items-center">
             <div className="size-12 flex justify-center items-center rounded-full bg-primary text-primary-foreground">

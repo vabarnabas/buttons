@@ -23,3 +23,22 @@ export async function createLink(data: CreateLink, pageId: string) {
 
   revalidatePath(`/dashboard/pages/${pageId}}`, "page");
 }
+
+export async function deleteLink(id: string, pageId: string) {
+  const { getToken } = auth();
+
+  const token = await getToken();
+
+  const res = await fetch(`${process.env.API_URL}/links/${id}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  if (!res.ok) {
+    throw new Error("Failed to delete link");
+  }
+
+  revalidatePath(`/dashboard/pages/${pageId}}`, "page");
+}

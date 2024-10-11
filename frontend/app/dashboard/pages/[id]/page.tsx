@@ -50,7 +50,7 @@ export default async function PagePage({
                   <p className="text-2xl font-medium">{group.name}</p>
                   <div className="flex gap-x-1.5">
                     <CreateLinkModal pageId={id} groupId={group.id} />
-                    <EditLinksModal links={group.links} />
+                    <EditLinksModal group={group} />
                   </div>
                 </div>
                 <p className="mt-1 text-muted-foreground text-sm">
