@@ -16,6 +16,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { createPage } from "@/lib/actions/page";
+import { Textarea } from "@/components/ui/textarea";
 
 export default function CreatePageForm() {
   const form = useForm<CreatePage>({
@@ -42,6 +43,20 @@ export default function CreatePageForm() {
               <FormLabel>Page Name</FormLabel>
               <FormControl>
                 <Input placeholder="Name of Your Page" {...field} />
+              </FormControl>
+              <FormDescription />
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="description"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Description (optional)</FormLabel>
+              <FormControl>
+                <Textarea placeholder="Describe Your Page" {...field} />
               </FormControl>
               <FormDescription />
               <FormMessage />
