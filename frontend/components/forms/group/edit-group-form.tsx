@@ -23,6 +23,7 @@ import {
   updateGroupSchema,
 } from "@/types/group.types";
 import { createGroup, updateGroup } from "@/lib/actions/group";
+import DeleteGroupButton from "@/components/buttons/group/delete-group-button";
 
 export default function EditGroupForm({ group }: { group: Group }) {
   const form = useForm<UpdateGroup>({
@@ -75,7 +76,8 @@ export default function EditGroupForm({ group }: { group: Group }) {
             </FormItem>
           )}
         />
-        <Button className="w-full">Create</Button>
+        <Button className="w-full">Update</Button>
+        <DeleteGroupButton groupId={group.id} pageId={group.pageId} />
       </form>
     </Form>
   );

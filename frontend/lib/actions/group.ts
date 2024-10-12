@@ -48,3 +48,22 @@ export async function updateGroup(
 
   revalidatePath(`/dashboard/pages/${pageId}}`, "page");
 }
+
+export async function deleteGroup(id: string, pageId: string) {
+  const { getToken } = auth();
+
+  const token = await getToken();
+
+  const res = await fetch(`${process.env.API_URL}/groups/${id}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  if (!res.ok) {
+    throw new Error("Failed to delete group");
+  }
+
+  revalidatePath(`/dashboard/pages/${pageId}}`, "page");
+}

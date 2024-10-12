@@ -1,5 +1,4 @@
 "use client";
-import CreateGroupForm from "@/components/forms/group/create-group-form";
 import CreateLinkForm from "@/components/forms/link/create-link-form";
 import { Button } from "@/components/ui/button";
 import {
@@ -17,8 +16,10 @@ export default function CreateLinkModal({
   pageId: string;
   groupId: string;
 }) {
+  const [isOpen, setIsOpen] = React.useState(false);
+
   return (
-    <Dialog>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         <Button variant="secondary" size="sm">
           Add Link
@@ -28,7 +29,11 @@ export default function CreateLinkModal({
         <DialogHeader className="text-2xl font-semibold">
           Create Link
         </DialogHeader>
-        <CreateLinkForm pageId={pageId} groupId={groupId} />
+        <CreateLinkForm
+          pageId={pageId}
+          groupId={groupId}
+          setIsOpen={setIsOpen}
+        />
       </DialogContent>
     </Dialog>
   );

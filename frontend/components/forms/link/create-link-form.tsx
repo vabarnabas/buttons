@@ -20,9 +20,11 @@ import { createLink } from "@/lib/actions/link";
 export default function CreateLinkForm({
   groupId,
   pageId,
+  setIsOpen,
 }: {
   groupId: string;
   pageId: string;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   const form = useForm<CreateLink>({
     resolver: zodResolver(createLinkSchema),
@@ -30,11 +32,15 @@ export default function CreateLinkForm({
   });
 
   const onSubmit = form.handleSubmit((data) => {
-    toast.promise(createLink(data, pageId), {
+    const status = toast.promise(createLink(data, pageId), {
       loading: "Creating Link...",
       success: "Link Created Successfully",
       error: "Failed to Create Link",
     });
+
+    if (status.toString() === "1") {
+      setIsOpen(false);
+    }
   });
 
   return (

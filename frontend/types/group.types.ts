@@ -8,7 +8,7 @@ export const createGroupSchema = z.object({
 });
 
 export const updateGroupSchema = z.object({
-  name: z.string().optional(),
+  name: z.string().min(3).optional(),
   description: z.string().optional(),
 });
 

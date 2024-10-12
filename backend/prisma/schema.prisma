@@ -16,6 +16,8 @@ model Page {
   userId String  @map("user_id")
   groups Group[]
 
+  isPublic Boolean @default(true)
+
   @@map("pages")
 }
 
@@ -26,7 +28,7 @@ model Group {
   description String?
 
   pageId String @map("page_id")
-  page   Page   @relation(fields: [pageId], references: [id])
+  page   Page   @relation(fields: [pageId], references: [id], onDelete: Cascade)
 
   links Link[]
 
@@ -42,7 +44,7 @@ model Link {
   url String
 
   groupId String @map("group_id")
-  group   Group  @relation(fields: [groupId], references: [id])
+  group   Group  @relation(fields: [groupId], references: [id], onDelete: Cascade)
 
   @@map("links")
 }

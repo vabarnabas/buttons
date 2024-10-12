@@ -11,35 +11,34 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
-import { deleteLink } from "@/lib/actions/link";
-import { Delete, Trash } from "lucide-react";
+import { deleteGroup } from "@/lib/actions/group";
 import React from "react";
 
-export default function DeleteLinkButton({
-  linkId,
+export default function DeleteGroupButton({
+  groupId,
   pageId,
 }: {
-  linkId: string;
+  groupId: string;
   pageId: string;
 }) {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button variant="destructive" size="sm" className="text-xs">
-          Remove
+        <Button variant="destructive" className="w-full">
+          Delete Group
         </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>You Are About to Delete a Link</AlertDialogTitle>
+          <AlertDialogTitle>You Are About to Delete a Group</AlertDialogTitle>
           <AlertDialogDescription>
-            This action cannot be undone. This will permanently delete this link
-            and its data from our servers.
+            This action cannot be undone. This will permanently delete this
+            group and its data from our servers.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction onClick={() => deleteLink(linkId, pageId)}>
+          <AlertDialogAction onClick={() => deleteGroup(groupId, pageId)}>
             Continue
           </AlertDialogAction>
         </AlertDialogFooter>
