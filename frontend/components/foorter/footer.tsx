@@ -1,5 +1,8 @@
 import React from "react";
 import PersonalLogo from "./personal-logo";
+import Link from "next/link";
+import { cn } from "@/lib/utils";
+import { buttonVariants } from "../ui/button";
 
 export default function Footer() {
   const className =
@@ -17,14 +20,28 @@ export default function Footer() {
           Created by
           <span className="ml-1 font-medium">Barnabas Varga</span>
         </p>
-        {/* <div className="flex items-center gap-x-3 text-xl">
-          <Link target="_blank" href={"https://github.com/vabarnabas"}>
-            <Github className={className} />
+        <div className="flex items-center gap-x-3 text-sm">
+          <Link
+            target="_blank"
+            href={"https://github.com/vabarnabas"}
+            className={cn(
+              buttonVariants({ variant: "link", size: "sm" }),
+              "p-0"
+            )}
+          >
+            Github
           </Link>
-          <Link target="_blank" href="https://www.linkedin.com/in/vabarnabas/">
-            <FaLinkedin className={className} />
+          <Link
+            target="_blank"
+            href="https://www.linkedin.com/in/vabarnabas/"
+            className={cn(
+              buttonVariants({ variant: "link", size: "sm" }),
+              "p-0"
+            )}
+          >
+            LinkedIn
           </Link>
-        </div> */}
+        </div>
       </div>
     </div>
   );

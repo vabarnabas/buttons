@@ -8,7 +8,7 @@ export default function PricingSection() {
   return (
     <div className="mt-16">
       <p className="text-4xl font-semibold mt-2">Pricing</p>
-      <div className="flex justify-center mt-6">
+      <div className="flex justify-center mt-12">
         <Card className="w-80">
           <CardHeader className="flex justify-center w-full text-center">
             <p className="text-lg">Starter Plan</p>
