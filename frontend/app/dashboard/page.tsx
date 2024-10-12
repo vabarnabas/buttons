@@ -16,15 +16,18 @@ export default async function Dashboard() {
 
   return (
     <div>
-      <p className="text-2xl font-semibold mt-2">My Boards</p>
+      <p className="text-2xl font-semibold mt-2">My Pages</p>
       <div className="mt-6 grid md:grid-cols-2 lg:grid-cols-3 gap-2">
         {pages.map((page) => (
           <Link
             key={page.id}
-            className="bg-secondary h-28 rounded-lg group flex p-4"
+            className="bg-secondary h-28 rounded-lg group flex flex-col p-4"
             href={`/dashboard/pages/${page.id}`}
           >
             <p className="text-foreground font-semibold text-lg">{page.name}</p>
+            <p className="text-sm text-muted-foreground mt-1">
+              {page.description}
+            </p>
           </Link>
         ))}
         <Link

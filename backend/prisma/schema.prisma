@@ -27,6 +27,8 @@ model Group {
   name        String
   description String?
 
+  index Int @default(autoincrement())
+
   pageId String @map("page_id")
   page   Page   @relation(fields: [pageId], references: [id], onDelete: Cascade)
 
@@ -42,6 +44,8 @@ model Link {
   description String?
 
   url String
+
+  index Int @default(autoincrement())
 
   groupId String @map("group_id")
   group   Group  @relation(fields: [groupId], references: [id], onDelete: Cascade)

@@ -4,7 +4,6 @@ import { groupSchema } from "./group.types";
 export const createPageSchema = z.object({
   name: z.string(),
   description: z.string().optional(),
-  userId: z.string(),
 });
 
 export const updatePageSchema = z.object({

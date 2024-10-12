@@ -1,12 +1,31 @@
 "use server";
 
-import { CreatePage } from "@/types/page.types";
+import { CreatePage, UpdatePage } from "@/types/page.types";
 import { auth } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
+export async function getMyPage() {
+  const { getToken } = auth();
+
+  const token = await getToken();
+
+  const res = await fetch(`${process.env.API_URL}/pages`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    cache: "no-store",
+  });
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch pages");
+  }
+
+  return await res.json();
+}
+
 export async function createPage(dto: CreatePage) {
-  const { userId, getToken } = auth();
+  const { getToken } = auth();
 
   const token = await getToken();
 
@@ -16,7 +35,7 @@ export async function createPage(dto: CreatePage) {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify({ ...dto, userId }),
+    body: JSON.stringify(dto),
   });
 
   if (!res.ok) {
@@ -25,5 +44,27 @@ export async function createPage(dto: CreatePage) {
 
   const page = await res.json();
   revalidatePath("/dashboard", "page");
-  redirect("/dashboard");
+  redirect(`/dashboard/pages/${page.id}`);
+}
+
+export async function updatePage(id: string, dto: UpdatePage) {
+  const { getToken } = auth();
+
+  const token = await getToken();
+
+  const res = await fetch(`${process.env.API_URL}/pages/${id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(dto),
+  });
+
+  if (!res.ok) {
+    throw new Error("Failed to update page");
+  }
+
+  revalidatePath("/dashboard", "page");
+  redirect(`/dashboard/${id}`);
 }

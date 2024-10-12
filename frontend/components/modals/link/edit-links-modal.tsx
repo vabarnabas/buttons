@@ -13,10 +13,6 @@ import { Group } from "@/types/group.types";
 import { LinkIcon, Pencil } from "lucide-react";
 import Image from "next/image";
 import React from "react";
-import { DndContext } from "@dnd-kit/core";
-import Draggable from "@/components/dnd/draggable";
-import Droppable from "@/components/dnd/dropable";
-import { SortableContext } from "@dnd-kit/sortable";
 
 export default function EditLinksModal({ group }: { group: Group }) {
   return (

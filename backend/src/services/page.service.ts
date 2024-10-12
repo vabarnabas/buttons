@@ -2,10 +2,6 @@ import { prisma } from "../prisma";
 import { CreatePage, UpdatePage } from "../types/page.types";
 
 export function PageService() {
-  async function findAll() {
-    return await prisma.page.findMany();
-  }
-
   async function findById(id: string) {
     return await prisma.page.findUnique({
       where: {
@@ -36,7 +32,7 @@ export function PageService() {
     });
   }
 
-  async function create(data: CreatePage) {
+  async function create(data: CreatePage & { userId: string }) {
     return await prisma.page.create({
       data,
     });
@@ -60,7 +56,6 @@ export function PageService() {
   }
 
   return {
-    findAll,
     findById,
     findByUserId,
     create,
