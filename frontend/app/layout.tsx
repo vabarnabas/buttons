@@ -21,7 +21,7 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={cn(
-          "w-full min-h-screen flex justify-center",
+          "w-full min-h-screen flex items-center flex-col",
           inter.className
         )}
       >
