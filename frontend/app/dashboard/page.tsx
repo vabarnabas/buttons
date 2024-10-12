@@ -1,18 +1,11 @@
+import { getMyPages } from "@/lib/actions/page";
 import { Page } from "@/types/page.types";
 import { Plus } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 
 export default async function Dashboard() {
-  const pageResponse = await fetch(`${process.env.API_URL}/pages`, {
-    cache: "no-store",
-  });
-
-  if (!pageResponse.ok) {
-    throw new Error("Failed to fetch pages");
-  }
-
-  const pages: Page[] = await pageResponse.json();
+  const pages: Page[] = await getMyPages();
 
   return (
     <div>

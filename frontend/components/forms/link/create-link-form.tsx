@@ -38,7 +38,7 @@ export default function CreateLinkForm({
       error: "Failed to Create Link",
     });
 
-    if (status.toString() === "1") {
+    if (status) {
       setIsOpen(false);
     }
   });

@@ -5,12 +5,12 @@ import { auth } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
-export async function getMyPage() {
+export async function getMyPages() {
   const { getToken } = auth();
 
   const token = await getToken();
 
-  const res = await fetch(`${process.env.API_URL}/pages`, {
+  const res = await fetch(`${process.env.API_URL}/pages/me`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -66,5 +66,5 @@ export async function updatePage(id: string, dto: UpdatePage) {
   }
 
   revalidatePath("/dashboard", "page");
-  redirect(`/dashboard/${id}`);
+  redirect(`/dashboard/pages/${id}`);
 }

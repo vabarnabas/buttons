@@ -6,7 +6,7 @@ import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 
-export default function DashboardNavbar() {
+export default function ShareNavbar() {
   return (
     <div
       className={cn(
@@ -15,7 +15,7 @@ export default function DashboardNavbar() {
     >
       <div className="w-full max-w-[1280px] px-6 flex items-center justify-between">
         <Link
-          href="/dashboard"
+          href="/"
           className="flex items-center gap-x-2 text-xl font-medium"
         >
           <LinkIcon className="size-5" /> Links & More

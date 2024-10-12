@@ -15,24 +15,24 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { Textarea } from "@/components/ui/textarea";
-import {
-  CreateGroup,
-  createGroupSchema,
-  Group,
-  UpdateGroup,
-  updateGroupSchema,
-} from "@/types/group.types";
+import { Group, UpdateGroup, updateGroupSchema } from "@/types/group.types";
 import { createGroup, updateGroup } from "@/lib/actions/group";
 import DeleteGroupButton from "@/components/buttons/group/delete-group-button";
 
-export default function EditGroupForm({ group }: { group: Group }) {
+export default function EditGroupForm({
+  group,
+  setIsOpen,
+}: {
+  group: Group;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
   const form = useForm<UpdateGroup>({
     resolver: zodResolver(updateGroupSchema),
     defaultValues: { ...group },
   });
 
   const onSubmit = form.handleSubmit((data) => {
-    toast.promise(
+    const status = toast.promise(
       updateGroup(group.id, group.pageId, {
         name: data.name,
         description: data.description,
@@ -43,6 +43,10 @@ export default function EditGroupForm({ group }: { group: Group }) {
         error: "Failed to Update Group",
       }
     );
+
+    if (status) {
+      setIsOpen(false);
+    }
   });
 
   return (

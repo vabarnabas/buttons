@@ -1,6 +1,6 @@
 import React from "react";
 import { ThemeSelector } from "../theme-selector/theme-selector";
-import { PanelsTopLeft } from "lucide-react";
+import { LinkIcon, PanelsTopLeft } from "lucide-react";
 import {
   SignedIn,
   SignedOut,
@@ -20,9 +20,12 @@ export default function Navbar() {
       )}
     >
       <div className="w-full max-w-[1280px] px-6 flex items-center justify-between">
-        <p className="flex items-center gap-x-2 text-xl font-medium">
-          <PanelsTopLeft className="size-6" /> Buttons
-        </p>
+        <Link
+          href={"/"}
+          className="flex items-center gap-x-2 text-xl font-medium"
+        >
+          <LinkIcon className="size-5" /> Links & More
+        </Link>
         <div className="flex gap-x-4 items-center">
           <ThemeSelector />
           <SignedIn>

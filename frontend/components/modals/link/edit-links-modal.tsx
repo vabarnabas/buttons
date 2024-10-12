@@ -15,8 +15,10 @@ import Image from "next/image";
 import React from "react";
 
 export default function EditLinksModal({ group }: { group: Group }) {
+  const [isOpen, setIsOpen] = React.useState(false);
+
   return (
-    <Dialog>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         <Button variant="outline" size="sm">
           <Pencil className="size-4" />
@@ -30,7 +32,7 @@ export default function EditLinksModal({ group }: { group: Group }) {
             <TabsTrigger value="links">Links</TabsTrigger>
           </TabsList>
           <TabsContent value="group">
-            <EditGroupForm group={group} />
+            <EditGroupForm group={group} setIsOpen={setIsOpen} />
           </TabsContent>
           <TabsContent value="links">
             <div className="mt-6">

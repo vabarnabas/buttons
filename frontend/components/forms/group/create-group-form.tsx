@@ -17,19 +17,32 @@ import { toast } from "sonner";
 import { Textarea } from "@/components/ui/textarea";
 import { CreateGroup, createGroupSchema } from "@/types/group.types";
 import { createGroup } from "@/lib/actions/group";
+import { set } from "zod";
 
-export default function CreateGroupForm({ pageId }: { pageId: string }) {
+export default function CreateGroupForm({
+  pageId,
+  setIsOpen,
+}: {
+  pageId: string;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
   const form = useForm<CreateGroup>({
     resolver: zodResolver(createGroupSchema),
     defaultValues: { pageId },
   });
 
   const onSubmit = form.handleSubmit((data) => {
-    toast.promise(createGroup(data), {
+    const status = toast.promise(createGroup(data), {
       loading: "Creating Group...",
       success: "Group Created Successfully",
       error: "Failed to Create Group",
     });
+
+    console.log("status", status);
+
+    if (status) {
+      setIsOpen(false);
+    }
   });
 
   return (

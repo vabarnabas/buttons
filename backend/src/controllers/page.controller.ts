@@ -7,6 +7,16 @@ import { getAuth } from "@hono/clerk-auth";
 export const pageController = new Hono();
 const pageService = PageService();
 
+pageController.get("/me", async (c) => {
+  const auth = getAuth(c);
+
+  if (!auth || !auth.userId) {
+    return c.json({ message: "Unauthorized" }, 401);
+  }
+
+  return c.json(await pageService.findByUserId(auth.userId));
+});
+
 pageController.get("/:id", async (c) => {
   const { id } = c.req.param();
   return c.json(await pageService.findById(id));
@@ -14,8 +24,6 @@ pageController.get("/:id", async (c) => {
 
 pageController.post("/", zValidator("json", createPageSchema), async (c) => {
   const auth = getAuth(c);
-
-  console.log(auth);
 
   if (!auth || !auth.userId) {
     return c.json({ message: "Unauthorized" }, 401);
@@ -33,6 +41,12 @@ pageController.patch(
   "/:id",
   zValidator("json", updatePageSchema),
   async (c) => {
+    const auth = getAuth(c);
+
+    if (!auth || !auth.userId) {
+      return c.json({ message: "Unauthorized" }, 401);
+    }
+
     const { id } = c.req.param();
     const data = c.req.valid("json");
     try {
@@ -44,6 +58,12 @@ pageController.patch(
 );
 
 pageController.delete("/:id", async (c) => {
+  const auth = getAuth(c);
+
+  if (!auth || !auth.userId) {
+    return c.json({ message: "Unauthorized" }, 401);
+  }
+
   const { id } = c.req.param();
   try {
     return c.json(await pageService.remove(id));

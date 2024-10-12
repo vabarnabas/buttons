@@ -11,8 +11,10 @@ import { Box } from "lucide-react";
 import React from "react";
 
 export default function CreateGroupModal({ pageId }: { pageId: string }) {
+  const [isOpen, setIsOpen] = React.useState(false);
+
   return (
-    <Dialog>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         <Button className="flex w-max items-center gap-x-1.5" size="sm">
           <Box className="size-4" />
@@ -23,7 +25,7 @@ export default function CreateGroupModal({ pageId }: { pageId: string }) {
         <DialogHeader className="text-2xl font-semibold">
           Create Group
         </DialogHeader>
-        <CreateGroupForm pageId={pageId} />
+        <CreateGroupForm pageId={pageId} setIsOpen={setIsOpen} />
       </DialogContent>
     </Dialog>
   );
