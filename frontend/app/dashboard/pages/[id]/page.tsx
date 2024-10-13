@@ -53,7 +53,7 @@ export default async function PagePage({
       </div>
       <p className="mt-2 text-muted-foreground text-sm">{page.description}</p>
       <Separator className="my-6" />
-      <div className="empty:mb-0 mb-6 space-y-6">
+      <div className="empty:mb-0 mb-6 space-y-2">
         {page.groups?.length ? (
           page.groups.map((group) => (
             <GroupContainer key={group.id} group={group} pageId={id} editable />

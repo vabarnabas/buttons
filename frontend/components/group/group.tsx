@@ -15,7 +15,7 @@ export default function GroupContainer({
   editable?: boolean;
 }) {
   return (
-    <div>
+    <div className="border p-4 rounded-lg">
       <div className="flex justify-between items-center">
         <p className="text-2xl font-medium leading-none">{group.name}</p>
         {editable ? (
@@ -28,19 +28,22 @@ export default function GroupContainer({
       <p
         className={cn(
           "text-muted-foreground text-sm",
-          editable ? "mt-1" : "mt-2"
+          editable ? "mt-1" : "mt-3"
         )}
       >
         {group.description}
       </p>
-      <div className="mt-4 flex gap-1 flex-wrap">
+      <div className="mt-4 flex gap-1 flex-wrap items-center">
         {group.links?.length ? (
           group.links?.map((link) => <LinkButton key={link.id} link={link} />)
-        ) : (
+        ) : !editable ? (
           <div className="">
-            <p className="">Its empty here, add some links.</p>
+            <p className="">Its empty here.</p>
           </div>
-        )}
+        ) : null}
+        {editable ? (
+          <CreateLinkModal small pageId={pageId} groupId={group.id} />
+        ) : null}
       </div>
     </div>
   );

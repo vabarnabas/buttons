@@ -7,7 +7,7 @@ import React from "react";
 
 export default function PricingSection() {
   return (
-    <div className="mt-16 scroll-mt-16">
+    <div id="pricing" className="mt-16 scroll-mt-16">
       <p className="text-4xl font-semibold mt-2">Pricing</p>
       <div className="flex justify-center mt-12">
         <Card className="w-80">
