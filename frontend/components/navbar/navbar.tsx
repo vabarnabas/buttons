@@ -24,7 +24,7 @@ export default function Navbar() {
           href={"/"}
           className="flex items-center gap-x-2 text-xl font-medium"
         >
-          <LinkIcon className="size-5" /> Links & More
+          <LinkIcon className="size-5 text-primary" /> Links & More
         </Link>
         <div className="flex gap-x-4 items-center">
           <ThemeSelector />

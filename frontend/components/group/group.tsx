@@ -3,6 +3,7 @@ import React from "react";
 import CreateLinkModal from "../modals/link/create-link-modal";
 import EditLinksModal from "../modals/link/edit-links-modal";
 import LinkButton from "../link-button/link-button";
+import { cn } from "@/lib/utils";
 
 export default function GroupContainer({
   group,
@@ -24,7 +25,14 @@ export default function GroupContainer({
           </div>
         ) : null}
       </div>
-      <p className="mt-1 text-muted-foreground text-sm">{group.description}</p>
+      <p
+        className={cn(
+          "text-muted-foreground text-sm",
+          editable ? "mt-1" : "mt-2"
+        )}
+      >
+        {group.description}
+      </p>
       <div className="mt-4 flex gap-1 flex-wrap">
         {group.links?.length ? (
           group.links?.map((link) => <LinkButton key={link.id} link={link} />)

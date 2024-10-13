@@ -27,9 +27,9 @@ export default function PricingSection() {
             <SignedIn>
               <Link
                 href="/dashboard"
-                className={cn(buttonVariants({ variant: "default" }))}
+                className={cn(buttonVariants({ variant: "default" }), "w-full")}
               >
-                Dashboard
+                Go to Dashboard
               </Link>
             </SignedIn>
             <SignedOut>
