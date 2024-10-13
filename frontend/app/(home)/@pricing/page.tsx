@@ -1,12 +1,13 @@
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { SignUpButton } from "@clerk/nextjs";
+import { cn } from "@/lib/utils";
+import { SignedIn, SignedOut, SignUpButton } from "@clerk/nextjs";
 import Link from "next/link";
 import React from "react";
 
 export default function PricingSection() {
   return (
-    <div className="mt-16">
+    <div className="mt-16 scroll-mt-16">
       <p className="text-4xl font-semibold mt-2">Pricing</p>
       <div className="flex justify-center mt-12">
         <Card className="w-80">
@@ -23,9 +24,19 @@ export default function PricingSection() {
               <li>Unlimited Groups</li>
               <li>Unlimited Links</li>
             </ul>
-            <SignUpButton>
-              <Button className="w-full">Sign Up</Button>
-            </SignUpButton>
+            <SignedIn>
+              <Link
+                href="/dashboard"
+                className={cn(buttonVariants({ variant: "default" }))}
+              >
+                Dashboard
+              </Link>
+            </SignedIn>
+            <SignedOut>
+              <SignUpButton>
+                <Button className="w-full">Sign Up</Button>
+              </SignUpButton>
+            </SignedOut>
           </CardContent>
         </Card>
       </div>

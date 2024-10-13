@@ -1,6 +1,8 @@
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function HeroSection() {
   return (
@@ -16,7 +18,12 @@ export default function HeroSection() {
           Forget about collecting links in notes or bookmarks. Here you can
           organize everything neatly in pages and groups, and even share them.
         </p>
-        <Button className="mt-6">Get Started</Button>
+        <Link
+          href="#pricing"
+          className={cn(buttonVariants({ variant: "default" }), "mt-6")}
+        >
+          Get Started
+        </Link>
       </div>
       <div className="mt-16 w-full flex-col items-center hidden md:flex">
         <Card className="relative w-full aspect-video overflow-clip">
